@@ -539,75 +539,91 @@
       overflow: hidden;
     }
 
-    .video-modal-panel {
-      position: relative;
-      width: min(430px, calc(100vw - 32px));
-      max-height: calc(100vh - 40px);
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.22);
-      border-radius: 28px;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.035)),
-        rgba(15,15,15,0.86);
-      box-shadow:
-        0 30px 90px rgba(0,0,0,0.72),
-        inset 0 1px 0 rgba(255,255,255,0.24);
-      backdrop-filter: blur(26px) saturate(130%);
-      -webkit-backdrop-filter: blur(26px) saturate(130%);
-    }
+.video-modal-panel {
+  position: relative;
 
-    .video-modal-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 4;
-      width: 36px;
-      height: 36px;
-      border: 1px solid rgba(255,255,255,0.26);
-      border-radius: 999px;
-      background: rgba(28,28,28,0.66);
-      color: rgba(246,243,238,0.92);
-      cursor: pointer;
-      font-size: 22px;
-      line-height: 1;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
+  /* Desktop fix: panel width now matches the vertical video */
+  width: min(390px, calc(100vw - 32px), calc((100vh - 170px) * 0.5625));
+  max-height: calc(100vh - 40px);
 
-    .video-modal-frame {
-      position: relative;
-      aspect-ratio: 9 / 16;
-      max-height: min(76vh, 720px);
-      background: #080808;
-      overflow: hidden;
-    }
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 28px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.035)),
+    rgba(15,15,15,0.86);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,0.72),
+    inset 0 1px 0 rgba(255,255,255,0.24);
+  backdrop-filter: blur(26px) saturate(130%);
+  -webkit-backdrop-filter: blur(26px) saturate(130%);
+}
 
-    .video-modal-frame img,
-    .video-modal-frame iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
+.video-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 4;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.26);
+  border-radius: 999px;
+  background: rgba(28,28,28,0.66);
+  color: rgba(246,243,238,0.92);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
 
-    .video-modal-frame img {
-      object-fit: cover;
-      filter: contrast(1.08) saturate(0.9);
-    }
+.video-modal-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  background: #080808;
+  overflow: hidden;
+}
 
-    .video-modal-frame iframe {
-      display: none;
-    }
+.video-modal-frame img,
+.video-modal-frame video,
+.video-modal-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 
-    .video-modal.has-video .video-modal-frame iframe {
-      display: block;
-    }
+.video-modal-frame img {
+  object-fit: cover;
+  filter: contrast(1.08) saturate(0.9);
+}
 
-    .video-modal.has-video .video-modal-frame img,
-    .video-modal.has-video .video-modal-empty {
-      display: none;
-    }
+.video-modal-frame video {
+  display: none;
+  object-fit: cover;
+  background: #000;
+}
+
+.video-modal-frame iframe {
+  display: none;
+}
+
+.video-modal.has-video .video-modal-frame video {
+  display: block;
+}
+
+.video-modal.has-youtube .video-modal-frame iframe {
+  display: block;
+}
+
+.video-modal.has-video .video-modal-frame img,
+.video-modal.has-youtube .video-modal-frame img,
+.video-modal.has-video .video-modal-empty,
+.video-modal.has-youtube .video-modal-empty {
+  display: none;
+}
 
     .video-modal-empty {
       position: absolute;
@@ -1028,49 +1044,49 @@
 
       <div class="reel-strip">
         <article class="reel-card glass-panel">
-          <div class="reel-thumb media-player" data-yt="YOUTUBE_VIDEO_ID">
-            <img class="media-poster" src="assets/mirror-road.jpg" alt="Roadside poster">
+          <div class="reel-thumb media-player" data-src="/assets/lastnight.mp4">
+            <img class="media-poster" src="assets/lastn.jpg" alt="Last Night poster">
             <iframe class="yt-iframe" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            <button class="play-mark" type="button" aria-label="Play Roadside"></button>
+            <button class="play-mark" type="button" aria-label="Play Last Night"></button>
           </div>
           <div class="reel-info">
-            <h3>Roadside</h3>
-            <p class="media-meta">00:31 · Reel</p>
+            <h3>Last Night</h3>
+            <p class="media-meta">00:13 · Reel</p>
           </div>
         </article>
 
         <article class="reel-card glass-panel">
-          <div class="reel-thumb media-player" data-yt="YOUTUBE_VIDEO_ID">
-            <img class="media-poster" src="assets/street-walk.jpg" alt="Street Frames poster">
+          <div class="reel-thumb media-player" data-src="/assets/testify.mp4">
+            <img class="media-poster" src="assets/testify.jpg" alt="Testify poster">
             <iframe class="yt-iframe" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            <button class="play-mark" type="button" aria-label="Play Street Frames"></button>
+            <button class="play-mark" type="button" aria-label="Play Testify"></button>
           </div>
           <div class="reel-info">
-            <h3>Street Frames</h3>
+            <h3>Testify</h3>
             <p class="media-meta">00:44 · Edit</p>
           </div>
         </article>
 
         <article class="reel-card glass-panel">
-          <div class="reel-thumb media-player" data-yt="YOUTUBE_VIDEO_ID">
-            <img class="media-poster" src="assets/football-edit.jpg" alt="After Class poster">
+          <div class="reel-thumb media-player" data-src="/assets/outro.mp4">
+            <img class="media-poster" src="assets/sunset.jpg" alt="After Class poster">
             <iframe class="yt-iframe" allow="autoplay; fullscreen" allowfullscreen></iframe>
             <button class="play-mark" type="button" aria-label="Play After Class"></button>
           </div>
           <div class="reel-info">
-            <h3>After Class</h3>
-            <p class="media-meta">00:27 · Reel</p>
+            <h3>Outro</h3>
+            <p class="media-meta">00:19 · Reel</p>
           </div>
         </article>
 
         <article class="reel-card glass-panel">
-          <div class="reel-thumb media-player" data-yt="YOUTUBE_VIDEO_ID">
-            <img class="media-poster" src="assets/hero-birds.jpg" alt="Quiet Roof poster">
+          <div class="reel-thumb media-player" data-src="/assets/paynalpromax.mp4">
+            <img class="media-poster" src="assets/concert.jpg" alt="Quiet Roof poster">
             <iframe class="yt-iframe" allow="autoplay; fullscreen" allowfullscreen></iframe>
             <button class="play-mark" type="button" aria-label="Play Quiet Roof"></button>
           </div>
           <div class="reel-info">
-            <h3>Quiet Roof</h3>
+            <h3>Concert for a Cause</h3>
             <p class="media-meta">00:38 · Edit</p>
           </div>
         </article>
@@ -1129,21 +1145,24 @@
 
   </main>
 
-  <div class="video-modal" id="reel-preview" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="reel-preview-title">
-    <div class="video-modal-panel">
-      <button class="video-modal-close" type="button" aria-label="Close preview">&times;</button>
-      <div class="video-modal-frame">
-        <img class="video-modal-poster" src="assets/mirror-road.jpg" alt="">
-        <iframe class="video-modal-iframe" allow="autoplay; fullscreen" allowfullscreen></iframe>
-        <p class="video-modal-empty">Add a YouTube video ID to this reel's <code>data-yt</code> value to play it here.</p>
-      </div>
-      <div class="video-modal-caption">
-        <span class="media-label">Motion Cut</span>
-        <h3 id="reel-preview-title">Roadside</h3>
-        <p class="media-meta">00:31 - Reel</p>
-      </div>
+<div class="video-modal" id="reel-preview" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="reel-preview-title">
+  <div class="video-modal-panel">
+    <button class="video-modal-close" type="button" aria-label="Close preview">&times;</button>
+
+    <div class="video-modal-frame">
+      <img class="video-modal-poster" src="assets/mirror-road.jpg" alt="">
+      <video class="video-modal-video" controls playsinline preload="metadata"></video>
+      <iframe class="video-modal-iframe" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <p class="video-modal-empty">Video preview not added yet.</p>
+    </div>
+
+    <div class="video-modal-caption">
+      <span class="media-label">Motion Cut</span>
+      <h3 id="reel-preview-title">Roadside</h3>
+      <p class="media-meta">00:31 · Reel</p>
     </div>
   </div>
+</div>
 
   <script>
     /* ── Nav toggle ── */
@@ -1181,99 +1200,132 @@
     });
 
     /* ── YouTube embed players ── */
-    const stopInlinePlayers = () => {
-      document.querySelectorAll('.media-player.is-playing').forEach(other => {
-        other.classList.remove('is-playing');
-        const otherFrame = other.querySelector('.yt-iframe');
-        if (otherFrame) otherFrame.src = '';
-      });
-    };
+/* ── YouTube / MP4 players ── */
+const stopInlinePlayers = () => {
+  document.querySelectorAll('.media-player.is-playing').forEach(other => {
+    other.classList.remove('is-playing');
 
-    const buildEmbedUrl = ytId => `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
-    const hasRealYoutubeId = ytId => ytId && ytId !== 'YOUTUBE_VIDEO_ID';
+    const otherFrame = other.querySelector('.yt-iframe');
+    if (otherFrame) otherFrame.src = '';
+  });
+};
 
-    const previewModal = document.getElementById('reel-preview');
-    const previewClose = previewModal?.querySelector('.video-modal-close');
-    const previewPoster = previewModal?.querySelector('.video-modal-poster');
-    const previewFrame = previewModal?.querySelector('.video-modal-iframe');
-    const previewLabel = previewModal?.querySelector('.video-modal-caption .media-label');
-    const previewTitle = previewModal?.querySelector('#reel-preview-title');
-    const previewMeta = previewModal?.querySelector('.video-modal-caption .media-meta');
-    let lastPreviewButton = null;
+const previewModal = document.getElementById('reel-preview');
+const previewClose = previewModal?.querySelector('.video-modal-close');
+const previewPoster = previewModal?.querySelector('.video-modal-poster');
+const previewFrame = previewModal?.querySelector('.video-modal-iframe');
+const previewVideo = previewModal?.querySelector('.video-modal-video');
+const previewLabel = previewModal?.querySelector('.video-modal-caption .media-label');
+const previewTitle = previewModal?.querySelector('#reel-preview-title');
+const previewMeta = previewModal?.querySelector('.video-modal-caption .media-meta');
 
-    const closePreview = () => {
-      if (!previewModal || !previewFrame) return;
-      previewModal.classList.remove('is-open', 'has-video', 'is-feature');
-      previewModal.setAttribute('aria-hidden', 'true');
-      previewFrame.src = '';
-      document.body.classList.remove('modal-open');
-      lastPreviewButton?.focus?.();
-    };
+let lastPreviewButton = null;
 
-    const openPreview = player => {
-      if (!previewModal || !previewPoster || !previewFrame || !previewLabel || !previewTitle || !previewMeta) return;
+const closePreview = () => {
+  if (!previewModal || !previewFrame || !previewVideo) return;
 
-      stopInlinePlayers();
+  previewModal.classList.remove('is-open', 'has-video', 'has-youtube', 'is-feature');
+  previewModal.setAttribute('aria-hidden', 'true');
 
-      const card = player.closest('.featured-film, .reel-card');
-      const isFeature = Boolean(player.closest('.featured-film'));
-      const poster = player.querySelector('.media-poster');
-      const title = card?.querySelector('h3')?.textContent?.trim() || 'Video Preview';
-      const label = card?.querySelector('.media-label')?.textContent?.trim() || 'Motion Cut';
-      const meta = card?.querySelector('.media-meta')?.textContent?.trim() || '';
-      const ytId = player.dataset.yt;
+  previewFrame.src = '';
 
-      lastPreviewButton = player.querySelector('.play-mark');
-      previewPoster.src = poster?.getAttribute('src') || '';
-      previewPoster.alt = `${title} poster`;
-      previewLabel.textContent = label;
-      previewTitle.textContent = title;
-      previewMeta.textContent = meta;
+  previewVideo.pause();
+  previewVideo.removeAttribute('src');
+  previewVideo.load();
 
-      if (hasRealYoutubeId(ytId)) {
-        previewFrame.src = buildEmbedUrl(ytId);
-        previewModal.classList.add('has-video');
-      } else {
-        previewFrame.src = '';
-        previewModal.classList.remove('has-video');
-      }
+  document.body.classList.remove('modal-open');
+  lastPreviewButton?.focus?.();
+};
 
-      previewModal.classList.toggle('is-feature', isFeature);
-      previewModal.classList.add('is-open');
-      previewModal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('modal-open');
-      previewClose?.focus();
-    };
+const openPreview = player => {
+  if (!previewModal || !previewPoster || !previewFrame || !previewVideo || !previewLabel || !previewTitle || !previewMeta) return;
 
-    previewClose?.addEventListener('click', closePreview);
-    previewModal?.addEventListener('click', event => {
-      if (event.target === previewModal) closePreview();
-    });
+  stopInlinePlayers();
 
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') closePreview();
-    });
+  const card = player.closest('.featured-film, .reel-card');
+  const isFeature = Boolean(player.closest('.featured-film'));
+  const poster = player.querySelector('.media-poster');
 
-    document.querySelectorAll('.media-player').forEach(player => {
-      const ytId = player.dataset.yt;
-      const iframe = player.querySelector('.yt-iframe');
-      const playBtn = player.querySelector('.play-mark');
-      if (!ytId || !iframe || !playBtn) return;
+  const title = card?.querySelector('h3')?.textContent?.trim() || 'Video Preview';
+  const label = card?.querySelector('.media-label')?.textContent?.trim() || 'Motion Cut';
+  const meta = card?.querySelector('.media-meta')?.textContent?.trim() || '';
 
-      const activate = () => {
-        if (player.closest('.reel-card')) {
-          openPreview(player);
-          return;
-        }
+  const src = player.dataset.src;
+  const yt = player.dataset.yt;
 
-        stopInlinePlayers();
-        iframe.src = buildEmbedUrl(ytId);
-        player.classList.add('is-playing');
-      };
+  lastPreviewButton = player.querySelector('.play-mark');
 
-      playBtn.addEventListener('click', e => { e.stopPropagation(); activate(); });
-      player.addEventListener('click', e => { if (e.target !== playBtn) activate(); });
-    });
+  previewPoster.src = poster?.getAttribute('src') || '';
+  previewPoster.alt = `${title} poster`;
+  previewLabel.textContent = label;
+  previewTitle.textContent = title;
+  previewMeta.textContent = meta;
+
+  previewFrame.src = '';
+
+  previewVideo.pause();
+  previewVideo.removeAttribute('src');
+  previewVideo.load();
+
+  previewModal.classList.remove('has-video', 'has-youtube');
+
+  if (src) {
+    previewVideo.src = src;
+    previewVideo.load();
+    previewVideo.play().catch(() => {});
+    previewModal.classList.add('has-video');
+  } else if (yt) {
+    previewFrame.src = `https://www.youtube.com/embed/${yt}?autoplay=1&rel=0&modestbranding=1`;
+    previewModal.classList.add('has-youtube');
+  }
+
+  previewModal.classList.toggle('is-feature', isFeature);
+  previewModal.classList.add('is-open');
+  previewModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+  previewClose?.focus();
+};
+
+previewClose?.addEventListener('click', closePreview);
+
+previewModal?.addEventListener('click', event => {
+  if (event.target === previewModal) closePreview();
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closePreview();
+});
+
+document.querySelectorAll('.media-player').forEach(player => {
+  const src = player.dataset.src;
+  const yt = player.dataset.yt;
+  const iframe = player.querySelector('.yt-iframe');
+  const playBtn = player.querySelector('.play-mark');
+
+  if ((!src && !yt) || !playBtn) return;
+
+  const activate = () => {
+    if (player.closest('.reel-card')) {
+      openPreview(player);
+      return;
+    }
+
+    if (!iframe || !yt) return;
+
+    stopInlinePlayers();
+    iframe.src = `https://www.youtube.com/embed/${yt}?autoplay=1&rel=0&modestbranding=1`;
+    player.classList.add('is-playing');
+  };
+
+  playBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    activate();
+  });
+
+  player.addEventListener('click', e => {
+    if (e.target !== playBtn) activate();
+  });
+});
   </script>
 
 </body>
